@@ -1,5 +1,9 @@
 import { Sequelize } from 'sequelize';
 
+//For Windows users: you must run 'SET client_encoding TO 'UTF8';'
+//in psql
+
+
 async function connectToDB(dbURI) {
   console.log(`Connecting to DB: ${dbURI}`);
 
