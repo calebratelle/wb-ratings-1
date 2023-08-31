@@ -54,7 +54,7 @@ app.post('/api/logout', loginRequired, (req, res) => {
 
 app.get('/api/ratings', loginRequired, async (req, res) => {
   const { userId } = req.session;
-
+console.log(req.session)
   const user = await User.findByPk(userId);
   const ratings = await user.getRatings({
     include: {
