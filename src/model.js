@@ -1,4 +1,4 @@
-import { Model, DataTypes } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import util from 'util';
 import connectToDB from './db.js';
 
@@ -66,16 +66,6 @@ Movie.init(
   },
 );
 
-//Use these four commands in the Node REPL to test the movie model.
-
-// const { Movie, db } = await import('./src/model.js');
-
-// await db.sync();
-
-// const testMovie = await Movie.create({ title: 'Test Movie' });
-
-// console.log(testMovie);
-
 export class Rating extends Model {
   [util.inspect.custom]() {
     return this.toJSON();
@@ -93,7 +83,6 @@ Rating.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    
   },
   {
     modelName: 'rating',
@@ -108,30 +97,3 @@ Rating.belongsTo(Movie, { foreignKey: 'movieId' });
 
 User.hasMany(Rating, { foreignKey: 'userId' });
 Rating.belongsTo(User, { foreignKey: 'userId' });
-
-// Run the node command to start the REPL and follow the steps below:
-
-// 1. Import the models and db instance from src/model.js.
-
-// const { User, Movie, Rating, db } = await import('./src/model.js');
-
-// 2. Call db.sync—by setting force: true in the options argument, Sequelize will delete all the tables and recreate them again.
-
-// await db.sync({ force: true });
-
-// 3. Create a User instance and a Movie instance.
-
-// const testUser = await User.create({ email: 'test@email.com', password: 'test' });
-// const testMovie = await Movie.create({ title: 'Test Movie' });
-
-// 4. Call testUser.createRating to create a rating for the user.
-
-// await testUser.createRating({
-//   score: 5,
-//   movieId: testMovie.movieId
-// });
-
-// 5. Call testMovie.getRatings—you should get an array with the rating you just created.
-
-// await testMovie.getRatings()
-
